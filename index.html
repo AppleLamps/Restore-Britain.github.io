@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restore Britain | Polling Tracker</title>
+    <meta name="description" content="Track and analyze Restore Britain party polling data. Latest polls, trends, and analysis.">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #c53030;
+            --bg: #f7fafc;
+            --text: #2d3748;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        header p { opacity: 0.9; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        .poll-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .poll-card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .poll-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        .poll-change {
+            color: #38a169;
+            font-weight: 600;
+        }
+        .poll-change.negative { color: var(--accent); }
+        .last-updated {
+            text-align: center;
+            color: #718096;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🇬🇧 Restore Britain</h1>
+        <p>Polling Tracker & Analysis</p>
+    </header>
+    
+    <div class="container">
+        <div class="poll-card">
+            <h2>Latest Polling Average</h2>
+            <div class="poll-number">--%</div>
+            <p>Awaiting first poll data...</p>
+        </div>
+        
+        <div class="poll-card">
+            <h2>Recent Polls</h2>
+            <p>No polling data available yet. Check back soon for updates.</p>
+        </div>
+        
+        <div class="poll-card">
+            <h2>Trend Analysis</h2>
+            <p>Analysis will be added once polling data is available.</p>
+        </div>
+        
+        <p class="last-updated">Last Updated: February 17, 2026</p>
+    </div>
+</body>
+</html>
