@@ -5,106 +5,380 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restore Britain | Polling Tracker</title>
     <meta name="description" content="Track and analyze Restore Britain party polling data. Latest polls, trends, and analysis.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a365d;
-            --accent: #c53030;
-            --bg: #f7fafc;
-            --text: #2d3748;
+            --primary: #0f172a;
+            --accent: #dc2626;
+            --accent-light: #fee2e2;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
             --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
         }
+        
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
+        
+        /* Header */
         header {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
             color: white;
-            padding: 1.5rem;
+            padding: 3rem 1.5rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-        header p { opacity: 0.9; }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        header h1 { 
+            font-size: 2.5rem; 
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+        
+        header p { 
+            opacity: 0.8;
+            font-size: 1.125rem;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
-        .poll-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
+        
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .poll-card h2 {
+        
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.04);
+        }
+        
+        .card h2 {
             color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.25rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .poll-number {
-            font-size: 3rem;
-            font-weight: bold;
-            color: var(--accent);
+        
+        /* Hero Stats */
+        .hero-stat {
+            text-align: center;
+            padding: 2rem;
         }
-        .poll-date {
-            color: #718096;
+        
+        .hero-stat .number {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent) 0%, #b91c1c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-stat .label {
+            color: var(--text-secondary);
             font-size: 0.875rem;
-            margin-top: 0.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
+        
+        /* Quick Stats Row */
+        .stat-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            padding: 1.25rem;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            border-radius: 12px;
+        }
+        
+        .stat-item .value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+        
+        .stat-item .label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Tables */
         .poll-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 0.5rem;
         }
+        
         .poll-table th,
         .poll-table td {
-            padding: 0.75rem;
+            padding: 0.875rem 1rem;
             text-align: left;
-            border-bottom: 1px solid var(--border);
         }
+        
         .poll-table th {
             font-weight: 600;
-            color: var(--primary);
-            background: #f7fafc;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #f8fafc;
+            border-bottom: 2px solid var(--border);
         }
-        .party-restore { color: var(--accent); font-weight: bold; }
-        .party-reform { color: #2b6cb0; }
-        .party-labour { color: #c53030; }
-        .party-conservative { color: #2b6cb0; }
-        .party-green { color: #38a169; }
-        .party-libdem { color: #d69e2e; }
-        .analysis-box {
-            background: #edf2f7;
-            border-left: 4px solid var(--accent);
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 0 4px 4px 0;
+        
+        .poll-table th:first-child { border-radius: 8px 0 0 0; }
+        .poll-table th:last-child { border-radius: 0 8px 0 0; }
+        
+        .poll-table td {
+            border-bottom: 1px solid var(--border);
+            font-weight: 500;
         }
-        .analysis-box h3 {
-            color: var(--primary);
+        
+        .poll-table tr:last-child td { border-bottom: none; }
+        .poll-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+        .poll-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+        
+        .poll-table tr:hover td {
+            background: #f8fafc;
+        }
+        
+        /* Party Colors */
+        .party-restore { color: var(--accent); font-weight: 700; }
+        .party-reform { color: #2563eb; }
+        .party-labour { color: #dc2626; }
+        .party-conservative { color: #2563eb; }
+        .party-green { color: #059669; }
+        .party-libdem { color: #d97706; }
+        
+        /* Change Indicators */
+        .change { font-size: 0.875rem; font-weight: 600; }
+        .change-down { color: #ef4444; }
+        .change-up { color: var(--success); }
+        .change-neutral { color: var(--text-secondary); }
+        
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 1.25rem;
+            margin-top: 1.25rem;
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .info-box h3 {
+            color: #1e40af;
             margin-bottom: 0.5rem;
-            font-size: 1rem;
-        }
-        .highlight {
-            background: #fef3c7;
-            padding: 0.125rem 0.375rem;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        .last-updated {
-            text-align: center;
-            color: #718096;
-            margin-top: 2rem;
             font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
+        
+        .info-box p {
+            color: #1e40af;
+            font-size: 0.9375rem;
+            opacity: 0.9;
+        }
+        
+        /* Analysis Cards */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+        
+        .analysis-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+        }
+        
+        .analysis-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 0.9375rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .analysis-card ul {
+            margin: 0.75rem 0 0 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        .analysis-card li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 0.125rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 700;
+            color: #92400e;
+        }
+        
+        /* News Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--border) 100%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.25rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-left: -4px;
+            box-shadow: 0 0 0 4px var(--accent-light);
+        }
+        
+        .timeline-item:last-child { padding-bottom: 0; }
+        
+        .timeline-date {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-content {
+            color: var(--text);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+        
+        /* Source */
         .source {
             font-size: 0.75rem;
-            color: #a0aec0;
-            margin-top: 0.5rem;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .footer .timestamp {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.375rem 0.75rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.875rem; }
+            .hero-stat .number { font-size: 3.5rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .stat-row { flex-direction: column; }
+            .poll-table { font-size: 0.875rem; }
+            .poll-table th, .poll-table td { padding: 0.75rem 0.5rem; }
         }
     </style>
 </head>
@@ -115,16 +389,38 @@
     </header>
     
     <div class="container">
-        <div class="poll-card">
-            <h2>🗳️ Latest Polling (Find Out Now)</h2>
-            <div class="poll-number">10%</div>
-            <p class="poll-date">February 14, 2026 | Sample: 1,000 GB adults</p>
-            <p class="source">Source: Find Out Now, commissioned by Restore Britain</p>
+        <!-- Hero Stats -->
+        <div class="grid grid-2">
+            <div class="card hero-stat">
+                <div class="number">10%</div>
+                <div class="label">Latest Polling (Feb 14)</div>
+                <p class="source">Find Out Now | 1,000 GB adults</p>
+            </div>
+            
+            <div class="card">
+                <h2>📊 Key Metrics</h2>
+                <div class="stat-row">
+                    <div class="stat-item">
+                        <span class="value">12</span>
+                        <span class="label">Councillors</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="value">5</span>
+                        <span class="label">Counties</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="value">50K</span>
+                        <span class="label">Members</span>
+                    </div>
+                </div>
+            </div>
         </div>
         
-        <div class="poll-card">
-            <h2>📊 National Voting Intention (Find Out Now)</h2>
-            <p class="poll-date">February 18, 2026 | Sample: 2,178 GB adults</p>
+        <!-- National Polling -->
+        <div class="card">
+            <h2>📈 National Voting Intention</h2>
+            <p class="source" style="margin-bottom: 1rem;">Find Out Now | February 18, 2026 | Sample: 2,178 GB adults</p>
+            
             <table class="poll-table">
                 <thead>
                     <tr>
@@ -136,124 +432,188 @@
                 <tbody>
                     <tr>
                         <td class="party-reform">Reform UK</td>
-                        <td>28%</td>
-                        <td>-1%</td>
+                        <td><strong>28%</strong></td>
+                        <td class="change change-down">▼ 1%</td>
                     </tr>
                     <tr>
                         <td class="party-green">Green Party</td>
-                        <td>18%</td>
-                        <td>No change</td>
+                        <td><strong>18%</strong></td>
+                        <td class="change change-neutral">—</td>
                     </tr>
                     <tr>
                         <td class="party-labour">Labour</td>
-                        <td>16%</td>
-                        <td>No change</td>
+                        <td><strong>16%</strong></td>
+                        <td class="change change-neutral">—</td>
                     </tr>
                     <tr>
                         <td class="party-conservative">Conservatives</td>
-                        <td>16%</td>
-                        <td>-3%</td>
+                        <td><strong>16%</strong></td>
+                        <td class="change change-down">▼ 3%</td>
                     </tr>
                     <tr>
                         <td class="party-libdem">Liberal Democrats</td>
-                        <td>10%</td>
-                        <td>-1%</td>
+                        <td><strong>10%</strong></td>
+                        <td class="change change-down">▼ 1%</td>
                     </tr>
                     <tr>
                         <td class="party-restore">Restore Britain</td>
-                        <td colspan="2">Included in 'Other' (highest ever recorded)</td>
+                        <td colspan="2"><span class="badge">In 'Other' — Highest Ever Recorded</span></td>
                     </tr>
                 </tbody>
             </table>
-            <p class="source">Source: Find Out Now, February 18, 2026 | Implied turnout: 54%</p>
-            <div class="analysis-box" style="margin-top: 1rem; border-left-color: #805ad5;">
-                <h3>Note on Methodology</h3>
-                <p>This was Find Out Now's first voting intention poll since Restore Britain's launch. The poll found 'Other' at the highest level ever recorded by the pollster, suggesting Restore Britain is capturing support not fully captured in the main party shares.</p>
+            
+            <div class="info-box">
+                <h3>💡 Methodology Note</h3>
+                <p>This was Find Out Now's first voting intention poll since Restore Britain's launch. The poll found 'Other' at the highest level ever recorded by the pollster.</p>
             </div>
+            
+            <p class="source">Implied turnout: 54%</p>
         </div>
         
-        <div class="poll-card">
-            <h2>📊 Full Poll Results</h2>
+        <!-- Commissioned Poll -->
+        <div class="card">
+            <h2>🗳️ Restore Britain Commissioned Poll</h2>
+            <p class="source" style="margin-bottom: 1rem;">Find Out Now | February 14, 2026 | Sample: 1,000 GB adults</p>
+            
             <table class="poll-table">
                 <thead>
                     <tr>
                         <th>Party</th>
                         <th>Vote Share</th>
-                        <th>Notes</th>
+                        <th>Context</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="party-reform">Reform UK</td>
-                        <td>25%</td>
+                        <td><strong>25%</strong></td>
                         <td>Down from 30%+ in other polls</td>
                     </tr>
                     <tr>
                         <td class="party-green">Green Party</td>
-                        <td>20%</td>
+                        <td><strong>20%</strong></td>
                         <td>Strong showing</td>
                     </tr>
                     <tr>
                         <td class="party-labour">Labour</td>
-                        <td>15%</td>
+                        <td><strong>15%</strong></td>
                         <td>Incumbent government</td>
                     </tr>
                     <tr>
                         <td class="party-conservative">Conservatives</td>
-                        <td>13%</td>
+                        <td><strong>13%</strong></td>
                         <td>Down from high-teens/low-twenties</td>
                     </tr>
                     <tr>
                         <td class="party-restore">Restore Britain</td>
-                        <td>10%</td>
+                        <td><strong>10%</strong></td>
                         <td>First poll with party on ballot</td>
                     </tr>
                     <tr>
                         <td class="party-libdem">Liberal Democrats</td>
-                        <td>10%</td>
+                        <td><strong>10%</strong></td>
                         <td>Tied with Restore Britain</td>
                     </tr>
                 </tbody>
             </table>
-            <p class="source">Source: Find Out Now, February 14, 2026</p>
         </div>
         
-        <div class="poll-card">
-            <h2>📈 Analysis</h2>
-            <div class="analysis-box">
-                <h3>Right-Wing Vote Split</h3>
-                <p>The first poll featuring Restore Britain shows a significant <span class="highlight">split in the right-wing vote</span>. With Rupert Lowe's party on the ballot:</p>
-                <ul style="margin: 0.5rem 0 0 1.5rem;">
-                    <li>Reform UK drops to 25% (from 30%+ in other polls)</li>
-                    <li>Conservatives fall to 13% (from high-teens/low-twenties)</li>
-                    <li>Restore Britain captures 10% immediately</li>
-                </ul>
+        <!-- Analysis -->
+        <div class="card">
+            <h2>🔍 Analysis</h2>
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>⚡ Right-Wing Vote Split</h3>
+                    <p>The first poll featuring Restore Britain shows a significant <span class="highlight">split in the right-wing vote</span>:</p>
+                    <ul>
+                        <li>Reform UK drops to 25% (from 30%+)</li>
+                        <li>Conservatives fall to 13%</li>
+                        <li>Restore Britain captures 10% immediately</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <h3>📊 Key Takeaways</h3>
+                    <ul>
+                        <li><strong>Immediate Impact:</strong> 10% in first survey suggests significant traction</li>
+                        <li><strong>Reform UK Hit:</strong> 5-point drop indicates direct competition</li>
+                        <li><strong>Methodology:</strong> Find Out Now polls Reform higher than other pollsters</li>
+                    </ul>
+                </div>
+                
+                <div class="analysis-card">
+                    <h3>🏛️ Councillor Defections</h3>
+                    <p>Restore Britain has gained <span class="highlight">12 councillors</span> since launch:</p>
+                    <ul>
+                        <li>Kent (7), Warwickshire (2)</li>
+                        <li>North Northamptonshire (1)</li>
+                        <li>Leicestershire (1), Hertfordshire (1)</li>
+                        <li>1 left after 2 days (Darren Rance)</li>
+                    </ul>
+                    <p style="margin-top: 0.75rem; font-size: 0.875rem; color: var(--text-secondary);">Not yet registered with Electoral Commission — defectors sit as independents</p>
+                </div>
             </div>
-            
-            <div class="analysis-box" style="margin-top: 1rem; border-left-color: #2b6cb0;">
-                <h3>Key Takeaways</h3>
-                <p>• <strong>Immediate Impact:</strong> Restore Britain polling at 10% in its first survey suggests significant potential traction.</p>
-                <p>• <strong>Reform UK Hit:</strong> The 5-point drop for Reform when Restore Britain is on the ballot indicates direct competition for the same voter base.</p>
-                <p>• <strong>Methodology Note:</strong> Find Out Now consistently polls Reform higher than other pollsters. The impact may be even more pronounced in other surveys.</p>
+        </div>
+        
+        <!-- News Timeline -->
+        <div class="card">
+            <h2>📰 Recent Developments</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">February 21, 2026</div>
+                    <div class="timeline-content">
+                        <strong>Leicestershire councillor Charles Whitford defects</strong> to Restore Britain after "clashes" with Reform UK county council leader Dan Harrison. Whitford had been suspended from the cabinet following complaints about emails he sent to residents regarding immigration.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">February 21, 2026</div>
+                    <div class="timeline-content">
+                        <strong>North Northamptonshire councillor Darren Rance quits</strong> Restore Britain after just two days, describing the party as "far more sinister than I first thought." Fellow defector Jack Goncalvez remains with the party but sits as an independent.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">February 20, 2026</div>
+                    <div class="timeline-content">
+                        <strong>Two Warwickshire councillors defect:</strong> Scott Cameron and Luke Cooper leave Reform UK for Restore Britain. Reform's group leader George Finch removed the whip from both, accusing them of "indulging in stunts."
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">February 19, 2026</div>
+                    <div class="timeline-content">
+                        <strong>Seven Kent County Council councillors defect:</strong> Paul Thomas, Oliver Bradshaw, Brian Black, Robert Ford, Isabella Kemp, Maxine Fothergill, and Dean Burns join Restore Britain. Fellow ex-Reform councillor Bill Barrett declined, stating "Restore is too right-wing for my political appetite."
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">February 18, 2026</div>
+                    <div class="timeline-content">
+                        <strong>Find Out Now releases first national voting intention poll</strong> since Restore Britain's launch, showing 'Other' at highest level ever recorded.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">February 15, 2026</div>
+                    <div class="timeline-content">
+                        Party reports hitting <strong>50,000 members</strong> on Instagram.
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">February 14, 2026</div>
+                    <div class="timeline-content">
+                        <strong>Rupert Lowe launches Restore Britain</strong> as a "national political party" after acrimonious split from Reform UK in March 2025.
+                    </div>
+                </div>
             </div>
-            
-            <div class="analysis-box" style="margin-top: 1rem; border-left-color: #38a169;">
-                <h3>Councillor Defections</h3>
-                <p>Restore Britain has gained <span class="highlight">12 councillors</span> since launch across Kent (7), Warwickshire (2), North Northamptonshire (1), Leicestershire (1), and Hertfordshire (1). However, one councillor (Darren Rance) subsequently left the party after just two days. The party is not yet officially registered with the Electoral Commission, meaning defectors must sit as independents.</p>            </div>
         </div>
         
-        <div class="poll-card">
-            <h2>📰 Recent News</h2>
-            <p><strong>February 21, 2026:</strong> Leicestershire councillor Charles Whitford defects to Restore Britain after "clashes" with Reform UK county council leader Dan Harrison. Whitford had been suspended from the cabinet following complaints about emails he sent to residents regarding immigration.</p>
-            <p style="margin-top: 0.5rem;"><strong>February 21, 2026:</strong> North Northamptonshire councillor Darren Rance quits Restore Britain after just two days, describing the party as "far more sinister than I first thought." Fellow defector Jack Goncalvez remains with the party but sits as an independent since Restore Britain is not yet officially registered.</p>
-            <p style="margin-top: 0.5rem;"><strong>February 20, 2026:</strong> Two Warwickshire councillors, Scott Cameron and Luke Cooper, defect from Reform UK to Restore Britain. Reform's group leader George Finch removed the whip from both councillors, accusing them of "indulging in stunts."</p>
-            <p style="margin-top: 0.5rem;"><strong>February 19, 2026:</strong> Seven former Reform UK councillors from Kent County Council defect to Restore Britain: Paul Thomas, Oliver Bradshaw, Brian Black, Robert Ford, Isabella Kemp, Maxine Fothergill, and Dean Burns. However, fellow ex-Reform councillor Bill Barrett declined to join, stating "Restore is too right-wing for my political appetite."</p>
-            <p style="margin-top: 0.5rem;"><strong>February 18, 2026:</strong> Find Out Now releases first national voting intention poll since Restore Britain's launch, showing 'Other' at highest level ever recorded.</p>
-            <p style="margin-top: 0.5rem;"><strong>February 15, 2026:</strong> Party reports hitting <strong>50,000 members</strong> on Instagram.</p>
-            <p style="margin-top: 0.5rem;"><strong>February 14, 2026:</strong> Rupert Lowe launches Restore Britain as a "national political party" after acrimonious split from Reform UK in March 2025.</p>
+        <!-- Footer -->
+        <div class="footer">
+            <p>Last Updated: <span class="timestamp">February 23, 2026 09:35</span></p>
         </div>
-        
-        <p class="last-updated">Last Updated: February 23, 2026 09:35</p>
     </div>
 </body>
 </html>
