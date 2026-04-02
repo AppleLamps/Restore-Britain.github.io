@@ -34,14 +34,22 @@ eval "$(ssh-agent -s)" && ssh-add ~/.ssh/restorebritain_deploy && git push
 - Survation
 - Opinium
 - Redfield & Wilton
+- Find Out Now (Restore Britain's pollster)
 - Major UK news outlets (BBC, Guardian, Telegraph)
 
 ## Last Update
-- Date: 2026-02-17 16:31
-- Status: Initial setup complete, awaiting first polling data
-- Changes: Created website structure, initial HTML/CSS
+- Date: 2026-04-02 13:30
+- Status: Updated with March 2026 polling data
+- Changes: 
+  - Latest poll: 7% (Mar 3-4, Find Out Now)
+  - Added polling history table with all 5 polls
+  - Updated councillor count to 10 (4 counties)
+  - Updated member count to 100K claimed
+  - Added analysis of right-wing vote split
+  - Updated timeline with March developments
 
 ## Notes
 - **SSH KEY:** Load restorebritain_deploy key before pushing (ssh-agent + ssh-add)
 - **UPDATE SCHEDULE:** Every 12 hours only
 - **ALWAYS PULL BEFORE EDITING**
+- **Current Polling Average:** 9% Restore Britain (Poll of Polls)
