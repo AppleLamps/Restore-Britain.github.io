@@ -370,7 +370,38 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
+        /* Navigation */
+        nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 1.875rem; }
@@ -379,6 +410,7 @@
             .stat-row { flex-direction: column; }
             .poll-table { font-size: 0.875rem; }
             .poll-table th, .poll-table td { padding: 0.75rem 0.5rem; }
+            nav ul { gap: 1rem; flex-wrap: wrap; }
         }
     </style>
 </head>
@@ -387,6 +419,13 @@
         <h1>🇬🇧 Restore Britain</h1>
         <p>Polling Tracker & Analysis</p>
     </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">📊 Polling Tracker</a></li>
+            <li><a href="news.html">📰 Latest News</a></li>
+        </ul>
+    </nav>
     
     <div class="container">
         <!-- Hero Stats -->
@@ -652,7 +691,8 @@
         
         <!-- Footer -->
         <div class="footer">
-            <p>Last Updated: <span class="timestamp">April 2, 2026 13:30</span></p>
+            <p>Last Updated: <span class="timestamp">April 2, 2026 13:45</span></p>
+            <p style="margin-top: 0.5rem;"><a href="news.html" style="color: var(--text-secondary);">📰 View Latest News →</a></p>
         </div>
     </div>
 </body>

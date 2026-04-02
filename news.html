@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restore Britain | Latest News</title>
+    <meta name="description" content="Latest news and developments from Restore Britain. Breaking stories, analysis, and political updates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #dc2626;
+            --accent-light: #fee2e2;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        header h1 { 
+            font-size: 2.5rem; 
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            letter-spacing: -0.02em;
+        }
+        
+        header p { 
+            opacity: 0.8;
+            font-size: 1.125rem;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        /* Navigation */
+        nav {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--accent);
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.04);
+        }
+        
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* News Article */
+        .news-article {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .news-article:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .news-date {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .news-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+        
+        .news-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .news-source {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .news-source a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .news-source a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Breaking Badge */
+        .breaking-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            background: var(--accent);
+            color: white;
+            font-size: 0.6875rem;
+            font-weight: 800;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Category Tags */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.625rem;
+            background: var(--bg);
+            color: var(--text-secondary);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 0.5rem;
+        }
+        
+        .tag-polling { background: #dbeafe; color: #1e40af; }
+        .tag-defection { background: #fee2e2; color: #991b1b; }
+        .tag-policy { background: #dcfce7; color: #166534; }
+        .tag-analysis { background: #fef3c7; color: #92400e; }
+        
+        /* Featured Article */
+        .featured {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
+            color: white;
+        }
+        
+        .featured .news-date {
+            color: #fca5a5;
+        }
+        
+        .featured .news-title {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .featured .news-excerpt {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .featured .news-source {
+            color: rgba(255,255,255,0.6);
+        }
+        
+        .featured .tag {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .sidebar-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        
+        .sidebar-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+            font-weight: 700;
+        }
+        
+        .quick-link {
+            display: block;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .quick-link:last-child {
+            border-bottom: none;
+        }
+        
+        .quick-link:hover {
+            color: var(--accent);
+        }
+        
+        .quick-link small {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            margin-top: 0.25rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .footer .timestamp {
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.875rem; }
+            nav ul { gap: 1rem; flex-wrap: wrap; }
+            .news-grid { grid-template-columns: 1fr; }
+            .featured { grid-column: auto; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🇬🇧 Restore Britain</h1>
+        <p>Latest News & Developments</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="index.html">📊 Polling Tracker</a></li>
+            <li><a href="news.html" class="active">📰 Latest News</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="news-grid">
+            <!-- Featured Article -->
+            <div class="card featured">
+                <div class="news-date">
+                    April 2, 2026
+                    <span class="breaking-badge">Latest</span>
+                </div>
+                <h2 class="news-title">Restore Britain Stabilizes at 7% in Latest Polling</h2>
+                <p class="news-excerpt">
+                    The third consecutive poll featuring Restore Britain as a registered party shows support stabilizing around 7%. Find Out Now's March 3-4 survey of 2,082 GB adults places RB at 7%, with Reform UK at 24% and the Greens surging to 20%. The data suggests the party has established a core base following its February launch, though it remains below the 10% peak seen in pre-registration polling.
+                </p>
+                <div>
+                    <span class="tag tag-polling">Polling</span>
+                    <span class="tag tag-analysis">Analysis</span>
+                </div>
+                <p class="news-source" style="margin-top: 1rem;">
+                    Source: Find Out Now | Sample: 2,082 GB adults | Fieldwork: March 3-4, 2026
+                </p>
+            </div>
+            
+            <!-- Main News Column -->
+            <div class="card">
+                <h2>📰 Recent Headlines</h2>
+                
+                <article class="news-article">
+                    <div class="news-date">March 4, 2026</div>
+                    <h3 class="news-title">March Poll Shows Right-Wing Vote Split Stabilizing</h3>
+                    <p class="news-excerpt">
+                        The latest Find Out Now poll confirms a persistent split in the right-wing vote, with Reform UK at 24%, Conservatives at 17%, and Restore Britain at 7%. The Poll of Polls average now stands at 9% for Restore Britain, suggesting the party has found its floor after an initial post-launch surge.
+                    </p>
+                    <div>
+                        <span class="tag tag-polling">Polling</span>
+                    </div>
+                    <p class="news-source">Source: Find Out Now</p>
+                </article>
+                
+                <article class="news-article">
+                    <div class="news-date">February 24, 2026</div>
+                    <h3 class="news-title">Advance UK Merger Talks Collapse</h3>
+                    <p class="news-excerpt">
+                        Ben Habib's Advance UK and Rupert Lowe's Restore Britain have failed to merge, with Habib issuing a nine-minute video denouncing Lowe as "owner and dictator." The collapse represents a significant setback for right-wing consolidation efforts, leaving two competing factions vying for the same voter base.
+                    </p>
+                    <div>
+                        <span class="tag tag-analysis">Politics</span>
+                        <span class="tag tag-defection">Merger</span>
+                    </div>
+                    <p class="news-source">Source: BBC News, The London Economic</p>
+                </article>
+                
+                <article class="news-article">
+                    <div class="news-date">February 23, 2026</div>
+                    <h3 class="news-title">Darren Rance Quits After Two Days</h3>
+                    <p class="news-excerpt">
+                        North Northamptonshire councillor Darren Rance has quit Restore Britain just two days after defecting, calling the party "far more sinister than I first thought." Rance, who represented Brickhill and Queensway ward in Wellingborough, has reapplied to Reform UK and apologized to former colleagues.
+                    </p>
+                    <div>
+                        <span class="tag tag-defection">Defection</span>
+                    </div>
+                    <p class="news-source">Source: Northants Telegraph</p>
+                </article>
+                
+                <article class="news-article">
+                    <div class="news-date">February 20, 2026</div>
+                    <h3 class="news-title">Leicestershire Councillor Defects After Cabinet Suspension</h3>
+                    <p class="news-excerpt">
+                        Charles Whitford, former Leicestershire County Council cabinet member for highways, transport and waste, has defected to Restore Britain following his suspension by Reform UK leader Dan Harrison. Whitford cited "clashes" with Harrison and claimed Reform had "drifted more to the left."
+                    </p>
+                    <div>
+                        <span class="tag tag-defection">Defection</span>
+                    </div>
+                    <p class="news-source">Source: BBC Leicester</p>
+                </article>
+                
+                <article class="news-article">
+                    <div class="news-date">February 20, 2026</div>
+                    <h3 class="news-title">Two Warwickshire Councillors Join Restore Britain</h3>
+                    <p class="news-excerpt">
+                        Scott Cameron and Luke Cooper have left Reform UK for Restore Britain, prompting Reform group leader George Finch to remove the whip from both, accusing them of "indulging in stunts." The defections bring Restore Britain's Warwickshire contingent to two councillors.
+                    </p>
+                    <div>
+                        <span class="tag tag-defection">Defection</span>
+                    </div>
+                    <p class="news-source">Source: Local Democracy Reporting Service</p>
+                </article>
+                
+                <article class="news-article">
+                    <div class="news-date">February 19, 2026</div>
+                    <h3 class="news-title">Seven Kent Councillors Defect, Form Official Group</h3>
+                    <p class="news-excerpt">
+                        Seven former Reform UK councillors have joined Restore Britain, instantly making it the third-largest group on Kent County Council. The defectors — Maxine Fothergill, Robert Ford, Paul Thomas, Dean Burns, Isabella Kemp, Brian Black, and Oliver Bradshaw — will form an official Restore Britain group. Six had previously been expelled from Reform UK.
+                    </p>
+                    <div>
+                        <span class="tag tag-defection">Defection</span>
+                        <span class="tag tag-analysis">Analysis</span>
+                    </div>
+                    <p class="news-source">Source: Kent Online, BBC News</p>
+                </article>
+                
+                <article class="news-article">
+                    <div class="news-date">February 14, 2026</div>
+                    <h3 class="news-title">Restore Britain Launches as Registered Political Party</h3>
+                    <p class="news-excerpt">
+                        Rupert Lowe has formally launched Restore Britain as a registered national political party, five months after his suspension from Reform UK. The launch event at Great Yarmouth's Britannia Pier drew significant attention, with Lowe pledging to field hundreds of candidates at the next general election. The party claims 50,000 members at launch.
+                    </p>
+                    <div>
+                        <span class="tag tag-policy">Launch</span>
+                    </div>
+                    <p class="news-source">Source: Restore Britain Press Release</p>
+                </article>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-card">
+                    <h3>🔥 Trending Topics</h3>
+                    <a href="#" class="quick-link">
+                        Polling Analysis
+                        <small>Latest numbers and trends</small>
+                    </a>
+                    <a href="#" class="quick-link">
+                        Councillor Defections
+                        <small>Track the movement between parties</small>
+                    </a>
+                    <a href="#" class="quick-link">
+                        Merger Collapse
+                        <small>What happened with Advance UK</small>
+                    </a>
+                    <a href="#" class="quick-link">
+                        Policy Positions
+                        <small>Immigration, crime, and more</small>
+                    </a>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3>📊 Quick Stats</h3>
+                    <a href="index.html" class="quick-link">
+                        Latest Polling: 7%
+                        <small>March 3-4, Find Out Now</small>
+                    </a>
+                    <a href="index.html" class="quick-link">
+                        Poll of Polls: 9%
+                        <small>Average of 5 national polls</small>
+                    </a>
+                    <a href="index.html" class="quick-link">
+                        10 Councillors
+                        <small>Across 4 counties</small>
+                    </a>
+                    <a href="index.html" class="quick-link">
+                        100K Members
+                        <small>Claimed by party</small>
+                    </a>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3>🔗 External Links</h3>
+                    <a href="https://restorebritain.org.uk" target="_blank" class="quick-link">
+                        Official Website
+                        <small>restorebritain.org.uk</small>
+                    </a>
+                    <a href="https://findoutnow.co.uk" target="_blank" class="quick-link">
+                        Find Out Now
+                        <small>Polling data source</small>
+                    </a>
+                    <a href="https://lowetracker.co.uk" target="_blank" class="quick-link">
+                        Lowe Tracker
+                        <small>Independent polling aggregator</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Last Updated: <span class="timestamp">April 2, 2026 13:45</span></p>
+            <p style="margin-top: 0.5rem;"><a href="index.html" style="color: var(--text-secondary);">← Back to Polling Tracker</a></p>
+        </div>
+    </div>
+</body>
+</html>
