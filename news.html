@@ -101,11 +101,25 @@
             padding: 2rem 1rem;
         }
         
-        /* News Grid */
+        /* News Grid - Fixed 2-column layout */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: 1fr 320px;
             gap: 1.5rem;
+            align-items: start;
+        }
+        
+        /* Main Content Column */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 900px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* Cards */
@@ -229,7 +243,6 @@
         
         /* Featured Article */
         .featured {
-            grid-column: 1 / -1;
             background: linear-gradient(135deg, var(--primary) 0%, #1e293b 100%);
             color: white;
         }
@@ -323,7 +336,6 @@
             header h1 { font-size: 1.875rem; }
             nav ul { gap: 1rem; flex-wrap: wrap; }
             .news-grid { grid-template-columns: 1fr; }
-            .featured { grid-column: auto; }
         }
     </style>
 </head>
@@ -342,126 +354,129 @@
     
     <div class="container">
         <div class="news-grid">
-            <!-- Featured Article -->
-            <div class="card featured">
-                <div class="news-date">
-                    April 4, 2026
-                    <span class="breaking-badge">Latest</span>
-                </div>
-                <h2 class="news-title">Restore Britain Rises to 8% in Latest Polling</h2>
-                <p class="news-excerpt">
-                    The fourth consecutive poll featuring Restore Britain as a registered party shows support rising to 8% — the highest level since the party's February launch. Find Out Now's March 25 survey of 2,948 GB adults places RB at 8% (up from 7% earlier in March), with Reform UK at 25% and the Greens at 19%. The data suggests the party may be gaining momentum after stabilizing at 7% in two previous polls.
-                </p>
-                <div>
-                    <span class="tag tag-polling">Polling</span>
-                    <span class="tag tag-analysis">Analysis</span>
-                </div>
-                <p class="news-source" style="margin-top: 1rem;">
-                    Source: Find Out Now | Sample: 2,948 GB adults | Fieldwork: March 25, 2026
-                </p>
-            </div>
-            
-            <!-- Main News Column -->
-            <div class="card">
-                <h2>📰 Recent Headlines</h2>
-                
-                <article class="news-article">
-                    <div class="news-date">March 25, 2026</div>
-                    <h3 class="news-title">March 25 Poll Shows Restore Britain at 8% — Highest Since Launch</h3>
+            <!-- Main Content Column -->
+            <div class="main-content">
+                <!-- Featured Article -->
+                <div class="card featured">
+                    <div class="news-date">
+                        April 4, 2026
+                        <span class="breaking-badge">Latest</span>
+                    </div>
+                    <h2 class="news-title">Restore Britain Rises to 8% in Latest Polling</h2>
                     <p class="news-excerpt">
-                        The latest Find Out Now poll of 2,948 GB adults shows Restore Britain rising to 8%, up from 7% in early March. The Poll of Polls average now stands at 9% for Restore Britain. The party appears to be gaining momentum after stabilizing in the previous two polls.
+                        The fourth consecutive poll featuring Restore Britain as a registered party shows support rising to 8% — the highest level since the party's February launch. Find Out Now's March 25 survey of 2,948 GB adults places RB at 8% (up from 7% earlier in March), with Reform UK at 25% and the Greens at 19%. The data suggests the party may be gaining momentum after stabilizing at 7% in two previous polls.
                     </p>
                     <div>
                         <span class="tag tag-polling">Polling</span>
-                    </div>
-                    <p class="news-source">Source: Find Out Now | Sample: 2,948 GB adults</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">March 4, 2026</div>
-                    <h3 class="news-title">March Poll Shows Right-Wing Vote Split Stabilizing</h3>
-                    <p class="news-excerpt">
-                        The latest Find Out Now poll confirms a persistent split in the right-wing vote, with Reform UK at 24%, Conservatives at 17%, and Restore Britain at 7%. The Poll of Polls average now stands at 9% for Restore Britain, suggesting the party has found its floor after an initial post-launch surge.
-                    </p>
-                    <div>
-                        <span class="tag tag-polling">Polling</span>
-                    </div>
-                    <p class="news-source">Source: Find Out Now</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">February 24, 2026</div>
-                    <h3 class="news-title">Advance UK Merger Talks Collapse</h3>
-                    <p class="news-excerpt">
-                        Ben Habib's Advance UK and Rupert Lowe's Restore Britain have failed to merge, with Habib issuing a nine-minute video denouncing Lowe as "owner and dictator." The collapse represents a significant setback for right-wing consolidation efforts, leaving two competing factions vying for the same voter base.
-                    </p>
-                    <div>
-                        <span class="tag tag-analysis">Politics</span>
-                        <span class="tag tag-defection">Merger</span>
-                    </div>
-                    <p class="news-source">Source: BBC News, The London Economic</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">February 23, 2026</div>
-                    <h3 class="news-title">Darren Rance Quits After Two Days</h3>
-                    <p class="news-excerpt">
-                        North Northamptonshire councillor Darren Rance has quit Restore Britain just two days after defecting, calling the party "far more sinister than I first thought." Rance, who represented Brickhill and Queensway ward in Wellingborough, has reapplied to Reform UK and apologized to former colleagues.
-                    </p>
-                    <div>
-                        <span class="tag tag-defection">Defection</span>
-                    </div>
-                    <p class="news-source">Source: Northants Telegraph</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">February 20, 2026</div>
-                    <h3 class="news-title">Leicestershire Councillor Defects After Cabinet Suspension</h3>
-                    <p class="news-excerpt">
-                        Charles Whitford, former Leicestershire County Council cabinet member for highways, transport and waste, has defected to Restore Britain following his suspension by Reform UK leader Dan Harrison. Whitford cited "clashes" with Harrison and claimed Reform had "drifted more to the left."
-                    </p>
-                    <div>
-                        <span class="tag tag-defection">Defection</span>
-                    </div>
-                    <p class="news-source">Source: BBC Leicester</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">February 20, 2026</div>
-                    <h3 class="news-title">Two Warwickshire Councillors Join Restore Britain</h3>
-                    <p class="news-excerpt">
-                        Scott Cameron and Luke Cooper have left Reform UK for Restore Britain, prompting Reform group leader George Finch to remove the whip from both, accusing them of "indulging in stunts." The defections bring Restore Britain's Warwickshire contingent to two councillors.
-                    </p>
-                    <div>
-                        <span class="tag tag-defection">Defection</span>
-                    </div>
-                    <p class="news-source">Source: Local Democracy Reporting Service</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">February 19, 2026</div>
-                    <h3 class="news-title">Seven Kent Councillors Defect, Form Official Group</h3>
-                    <p class="news-excerpt">
-                        Seven former Reform UK councillors have joined Restore Britain, instantly making it the third-largest group on Kent County Council. The defectors — Maxine Fothergill, Robert Ford, Paul Thomas, Dean Burns, Isabella Kemp, Brian Black, and Oliver Bradshaw — will form an official Restore Britain group. Six had previously been expelled from Reform UK.
-                    </p>
-                    <div>
-                        <span class="tag tag-defection">Defection</span>
                         <span class="tag tag-analysis">Analysis</span>
                     </div>
-                    <p class="news-source">Source: Kent Online, BBC News</p>
-                </article>
-                
-                <article class="news-article">
-                    <div class="news-date">February 14, 2026</div>
-                    <h3 class="news-title">Restore Britain Launches as Registered Political Party</h3>
-                    <p class="news-excerpt">
-                        Rupert Lowe has formally launched Restore Britain as a registered national political party, five months after his suspension from Reform UK. The launch event at Great Yarmouth's Britannia Pier drew significant attention, with Lowe pledging to field hundreds of candidates at the next general election. The party claims 50,000 members at launch.
+                    <p class="news-source" style="margin-top: 1rem;">
+                        Source: Find Out Now | Sample: 2,948 GB adults | Fieldwork: March 25, 2026
                     </p>
-                    <div>
-                        <span class="tag tag-policy">Launch</span>
-                    </div>
-                    <p class="news-source">Source: Restore Britain Press Release</p>
-                </article>
+                </div>
+                
+                <!-- Main News Column -->
+                <div class="card">
+                    <h2>📰 Recent Headlines</h2>
+                    
+                    <article class="news-article">
+                        <div class="news-date">March 25, 2026</div>
+                        <h3 class="news-title">March 25 Poll Shows Restore Britain at 8% — Highest Since Launch</h3>
+                        <p class="news-excerpt">
+                            The latest Find Out Now poll of 2,948 GB adults shows Restore Britain rising to 8%, up from 7% in early March. The Poll of Polls average now stands at 9% for Restore Britain. The party appears to be gaining momentum after stabilizing in the previous two polls.
+                        </p>
+                        <div>
+                            <span class="tag tag-polling">Polling</span>
+                        </div>
+                        <p class="news-source">Source: Find Out Now | Sample: 2,948 GB adults</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">March 4, 2026</div>
+                        <h3 class="news-title">March Poll Shows Right-Wing Vote Split Stabilizing</h3>
+                        <p class="news-excerpt">
+                            The latest Find Out Now poll confirms a persistent split in the right-wing vote, with Reform UK at 24%, Conservatives at 17%, and Restore Britain at 7%. The Poll of Polls average now stands at 9% for Restore Britain, suggesting the party has found its floor after an initial post-launch surge.
+                        </p>
+                        <div>
+                            <span class="tag tag-polling">Polling</span>
+                        </div>
+                        <p class="news-source">Source: Find Out Now</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">February 24, 2026</div>
+                        <h3 class="news-title">Advance UK Merger Talks Collapse</h3>
+                        <p class="news-excerpt">
+                            Ben Habib's Advance UK and Rupert Lowe's Restore Britain have failed to merge, with Habib issuing a nine-minute video denouncing Lowe as "owner and dictator." The collapse represents a significant setback for right-wing consolidation efforts, leaving two competing factions vying for the same voter base.
+                        </p>
+                        <div>
+                            <span class="tag tag-analysis">Politics</span>
+                            <span class="tag tag-defection">Merger</span>
+                        </div>
+                        <p class="news-source">Source: BBC News, The London Economic</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">February 23, 2026</div>
+                        <h3 class="news-title">Darren Rance Quits After Two Days</h3>
+                        <p class="news-excerpt">
+                            North Northamptonshire councillor Darren Rance has quit Restore Britain just two days after defecting, calling the party "far more sinister than I first thought." Rance, who represented Brickhill and Queensway ward in Wellingborough, has reapplied to Reform UK and apologized to former colleagues.
+                        </p>
+                        <div>
+                            <span class="tag tag-defection">Defection</span>
+                        </div>
+                        <p class="news-source">Source: Northants Telegraph</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">February 20, 2026</div>
+                        <h3 class="news-title">Leicestershire Councillor Defects After Cabinet Suspension</h3>
+                        <p class="news-excerpt">
+                            Charles Whitford, former Leicestershire County Council cabinet member for highways, transport and waste, has defected to Restore Britain following his suspension by Reform UK leader Dan Harrison. Whitford cited "clashes" with Harrison and claimed Reform had "drifted more to the left."
+                        </p>
+                        <div>
+                            <span class="tag tag-defection">Defection</span>
+                        </div>
+                        <p class="news-source">Source: BBC Leicester</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">February 20, 2026</div>
+                        <h3 class="news-title">Two Warwickshire Councillors Join Restore Britain</h3>
+                        <p class="news-excerpt">
+                            Scott Cameron and Luke Cooper have left Reform UK for Restore Britain, prompting Reform group leader George Finch to remove the whip from both, accusing them of "indulging in stunts." The defections bring Restore Britain's Warwickshire contingent to two councillors.
+                        </p>
+                        <div>
+                            <span class="tag tag-defection">Defection</span>
+                        </div>
+                        <p class="news-source">Source: Local Democracy Reporting Service</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">February 19, 2026</div>
+                        <h3 class="news-title">Seven Kent Councillors Defect, Form Official Group</h3>
+                        <p class="news-excerpt">
+                            Seven former Reform UK councillors have joined Restore Britain, instantly making it the third-largest group on Kent County Council. The defectors — Maxine Fothergill, Robert Ford, Paul Thomas, Dean Burns, Isabella Kemp, Brian Black, and Oliver Bradshaw — will form an official Restore Britain group. Six had previously been expelled from Reform UK.
+                        </p>
+                        <div>
+                            <span class="tag tag-defection">Defection</span>
+                            <span class="tag tag-analysis">Analysis</span>
+                        </div>
+                        <p class="news-source">Source: Kent Online, BBC News</p>
+                    </article>
+                    
+                    <article class="news-article">
+                        <div class="news-date">February 14, 2026</div>
+                        <h3 class="news-title">Restore Britain Launches as Registered Political Party</h3>
+                        <p class="news-excerpt">
+                            Rupert Lowe has formally launched Restore Britain as a registered national political party, five months after his suspension from Reform UK. The launch event at Great Yarmouth's Britannia Pier drew significant attention, with Lowe pledging to field hundreds of candidates at the next general election. The party claims 50,000 members at launch.
+                        </p>
+                        <div>
+                            <span class="tag tag-policy">Launch</span>
+                        </div>
+                        <p class="news-source">Source: Restore Britain Press Release</p>
+                    </article>
+                </div>
             </div>
             
             <!-- Sidebar -->
